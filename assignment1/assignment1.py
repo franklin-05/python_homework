@@ -1,14 +1,14 @@
 # Write your code here.
 
 #Task 1
-def greet():
+def hello():
     return "Hello!"
-print(greet())
+print(hello())
 
 #Task 2
-def personalized_greeting(name):
+def greet(name):
     return f"Hello, {name}!"
-print(personalized_greeting("Alice"))
+print(greet("Alice"))
 
 #Task 3
 def calc(num1, num2, operation="multiply"):
@@ -41,7 +41,7 @@ def data_type_conversion(value, data_type):
         elif data_type == "bool":
             return bool(value)
     except ValueError:
-        return "Invalid value for conversion"
+        return f"You can't convert {value} to a {data_type}!"
 #Task 5 
 def grade(*args):
     try:
@@ -61,7 +61,7 @@ def grade(*args):
 
 
 #Task 6
-def repeat_string(string, times):
+def repeat(string, times):
     result = ""
     for _ in range(times):
         result += string
@@ -72,13 +72,10 @@ def student_scores(mode, **kwargs):
     if mode == "mean":
         return sum(kwargs.values()) / len(kwargs)
     elif mode == "best":
-        highest_score = -1
-        best_student = None
+        highest_score = max(kwargs.values())
         for student, score in kwargs.items():
-            if score > highest_score:
-                highest_score = score
-                best_student = student
-        return best_student
+            if score == highest_score:
+                return student
 #Task 8
 def titleize(title):
     words = title.split()
@@ -105,13 +102,14 @@ def translate_word(word):
     vowels = "aeiou"
     if word[0] in vowels:
         return word + "ay"
-    elif word.startswith("qu"):
-        return word[2:] + "quay"
-    else:
-        for i, letter in enumerate(word):
-            if letter in vowels:
-                return word[i:] + word[:i] + "ay"
-        return word + "ay"  # Fallback if there are no vowels at all
+    
+    for i, letter in enumerate(word):
+        if letter in vowels:
+            if letter == 'u' and i > 0 and word[i-1] == 'q':
+                continue
+            return word[i:] + word[:i] + "ay"
+            
+    return word + "ay"
 
 def pig_latin(sentence):
     words = sentence.split()
