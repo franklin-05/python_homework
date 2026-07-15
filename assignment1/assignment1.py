@@ -13,7 +13,7 @@ print(greet("Alice"))
 #Task 3
 def calc(num1, num2, operation="multiply"):
     try:
-        if operation =="add":
+        if operation == "add":
             return num1 + num2
         elif operation == "subtract":
             return num1 - num2
@@ -25,6 +25,8 @@ def calc(num1, num2, operation="multiply"):
             return num1 % num2
         elif operation == "int_divide":
             return num1 // num2
+        elif operation == "power":
+            return num1 ** num2
     except ZeroDivisionError:
         return "You can't divide by 0!"
     except TypeError:
@@ -41,7 +43,7 @@ def data_type_conversion(value, data_type):
         elif data_type == "bool":
             return bool(value)
     except ValueError:
-        return f"You can't convert {value} to a {data_type}!"
+        return f"You can't convert {value} into  a {data_type}."
 #Task 5 
 def grade(*args):
     try:
@@ -57,7 +59,7 @@ def grade(*args):
         else:
             return "F"
     except(TypeError, ZeroDivisionError):
-        return "Invalid input for grade calculation"
+        return "Invalid data was provided."
 
 
 #Task 6
@@ -79,8 +81,8 @@ def student_scores(mode, **kwargs):
 #Task 8
 def titleize(title):
     words = title.split()
-    little_words = ["and", "or", "the", "a", "an", "in", "on", "at", "to", "for", "with"]
-    last_index=len(words) - 1
+    little_words = ["a", "on", "an", "the", "of", "and", "is", "in"]
+    last_index = len(words) - 1
     for i in range(len(words)):
         if i == 0 or i == last_index or words[i].lower() not in little_words:
             words[i] = words[i].capitalize()
@@ -106,7 +108,7 @@ def translate_word(word):
     for i, letter in enumerate(word):
         if letter in vowels:
             if letter == 'u' and i > 0 and word[i-1] == 'q':
-                continue
+                return word[i+1:] + word[:i+1] + "ay"
             return word[i:] + word[:i] + "ay"
             
     return word + "ay"
